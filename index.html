@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>DocsVision</title>
+	<script src="https://use.fontawesome.com/a21362336b.js"></script>
+	<link href="css/form.css" rel="stylesheet" type="text/css">
+	<link href="css/main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="left">
+	<div class="headOfBuildings">Здания<hr noshade></div>
+	<div id="listOfBuildings"></div>
+</div>
+<div id="right">
+	<div class="headOfEquipment">Оборудование</div>
+	<div id="listOfEquipment">
+	<div class="formEq">
+		<form class="eqEdit">
+			<div class="groups">
+				<div class="group">
+					<input type="text" name="name"><span class="highlight"></span><span class="bar"></span>
+					<label>Наименование</label>
+				</div>
+				<div class="group2">
+					<input type="text" name="count"><span class="highlight"></span><span class="bar"></span>
+					<label>Количество</label>
+				</div>
+			</div>
+			<div class="group3">Удалить оборудование?</div>
+			<button type="button" class="button buttonBlue" id="idBtnActn">Сохранить</button>
+			<button type="button" class="button2 buttonBlue" id="idBtnCncl">Отмена</button>
+		</form>
+	</div>
+	<div class="arrowForEq"><i class="fa fa-angle-double-left"></i></div>
+	</div>
+</div>
+	<script src="js/scorocode.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
