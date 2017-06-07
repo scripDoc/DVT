@@ -192,8 +192,8 @@ fBuild.then(function(){
 							if (searchEdit) {
 								var liR = document.createElement("li");
 								var iconAdd = document.createElement("i");
-								liR.id = "lba"+equipment[0].room;
-								iconAdd.id = "icn"+equipment[0].room;
+								liR.id = "lba"+input;
+								iconAdd.id = "icn"+input;
 								liR.classList.add("edit", "addEq");
 								iconAdd.classList.add("fa", "addEq", "fa-plus");
 								liR.appendChild(iconAdd);
