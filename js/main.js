@@ -37,7 +37,7 @@ var fBuild = buildings.find().then((found) => {
 			li2.appendChild(span2);
 			ul2.appendChild(li2);
 
-			if (buildings[i].rooms[j].children) {
+			if (path2.children) {
 				var ul3 = document.createElement("ul");
 				for (var k = 0, len3 = path2.children.length; k < len3; k++) {
 					li2.appendChild(ul3);
@@ -92,45 +92,57 @@ fBuild.then(function(){
 	var arForEq = document.querySelector("div.arrowForEq");
 	arForEq.classList.add("active");
 
-	// Добавление класса "active" пунктам, содержащим оборудование
-	var listOfBuild = document.getElementById("listOfBuildings");
-	var elementsBldSpan = listOfBuild.getElementsByTagName("span");
+	function addActive() {
 
-	for (var i = 0; i < elementsBldSpan.length; i++) {
-		var input = elementsBldSpan[i].id;
+		// Добавление класса "active" пунктам, содержащим оборудование
+		var listOfBuild = document.getElementById("listOfBuildings");
+		var elementsBldSpan = listOfBuild.getElementsByTagName("span");
 
-		var getItems = new Scorocode.Query("equipment");
-		var forSearchActive = getItems.equalTo("room", input)
-				.find()
-					.then((found) => {
-						let equipment = found.result;
+		for (var i = 0; i < elementsBldSpan.length; i++) {
+			var input = elementsBldSpan[i].id;
+			var elLi = document.getElementById("li"+input);
+			var lstLi = elLi.getElementsByTagName("li");
+			if (!lstLi.length) {
+				var searchActiveli = elLi.getElementsByClassName("active");
+				if (searchActiveli) elLi.classList.remove("active");
+			}
 
-						if (equipment.length) {
-							var idToli = document.getElementById("li"+equipment[0].room);
-							idToli.classList.add("active");
-						}
-						getItems.reset()
-						return equipment;
-					})
-					.catch((error) => {
-						console.log("Что-то пошло не так: \n", error)
-					});
-	}
+			var getItems = new Scorocode.Query("equipment");
+			var forSearchActive = getItems.equalTo("room", input)
+					.find()
+						.then((found) => {
+							let equipment = found.result;
 
-	// Поиск дочерних элементов с классом "active"
-	// Поиск элементов без дочерних узлов с добавлением класса "edit"
-	forSearchActive.then(function(){
-		var elementsBldLi = listOfBuild.getElementsByTagName("li");
-		for (var i = 0; i < elementsBldLi.length; i++) {
-			var input = elementsBldLi[i].id;
-			var elemLi = document.getElementById(input);
-			var searchActive = elemLi.getElementsByClassName("active");
-			var lastLi = elemLi.getElementsByTagName("li");
-
-			if (searchActive.length) elemLi.classList.add("active");
-			if (!lastLi.length) elemLi.classList.add("edit");
+							if (equipment.length) {
+								var idToli = document.getElementById("li"+equipment[0].room);
+								idToli.classList.add("active");
+							}
+							getItems.reset()
+							return equipment;
+						})
+						.catch((error) => {
+							console.log("Что-то пошло не так: \n", error)
+						});
 		}
-	});
+
+		// Поиск дочерних элементов с классом "active"
+		// Поиск элементов без дочерних узлов с добавлением класса "edit"
+		forSearchActive.then(function(){
+			var elementsBldLi = listOfBuild.getElementsByTagName("li");
+			for (var i = 0; i < elementsBldLi.length; i++) {
+				var input = elementsBldLi[i].id;
+				var elemLi = document.getElementById(input);
+				var searchActiveLi = elemLi.querySelector("li.active");
+				var lastLi = elemLi.getElementsByTagName("li");
+
+				if (searchActiveLi) elemLi.classList.add("active")
+					else if (lastLi.length) elemLi.classList.remove("active");
+
+				if (!lastLi.length) elemLi.classList.add("edit");
+			}
+		});
+	}
+	addActive();
 
 	// Поиск и отображение оборудования по выбранному объекту
 	document.getElementById("listOfBuildings").addEventListener("click", searchFunc);
@@ -209,7 +221,7 @@ fBuild.then(function(){
 							console.log("Что-то пошло не так: \n", error)
 						});
 			}
-		}else arForEq.classList.add("active");
+		} else arForEq.classList.add("active");
 	};
 
 	//Отображение формы
@@ -241,8 +253,11 @@ fBuild.then(function(){
 						equip.save().then(() => {
 							console.info("done");
 							searchFunc(classIdRm);
+						})
+						.catch((error) => {
+							console.log(error);
+							searchFunc(idEq);
 						});
-						resetForm();
 					}
 					break;
 
@@ -261,9 +276,16 @@ fBuild.then(function(){
 							equip.remove(item).then(() => {
 							console.info("Done");
 							searchFunc(classIdRm);
+							})
+							.catch((error) => {
+							console.log(error);
+							searchFunc(idEq);
 							});
+						})
+						.catch((error) => {
+							console.log(error);
+							searchFunc(idEq);
 						});
-						resetForm();
 					}
 					break;
 
@@ -287,8 +309,11 @@ fBuild.then(function(){
 						comp.save().then(() => {
 							console.info("Done");
 							searchFunc(idEq);
+						})
+						.catch((error) => {
+							console.log(error);
+							searchFunc(idEq);
 						});
-						resetForm();
 					}
 					break;
 			}
