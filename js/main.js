@@ -18,44 +18,48 @@ var fBuild = buildings.find().then((found) => {
 	for (var i = 0, len = buildings.length; i < len; i++) {
 		var li = document.createElement("li");
 		var span = document.createElement("span");
-		span.innerHTML = buildings[i].name;
-		span.id = buildings[i]._id;
-		li.id = "li"+buildings[i]._id;
+		var path = buildings[i];
+		span.innerHTML = path.name;
+		span.id = path._id;
+		li.id = "li"+path._id;
 		li.appendChild(span);
 		ul.appendChild(li);
 
 		var ul2 = document.createElement("ul");
-		for (var j = 0, len2 = buildings[i].rooms.length; j < len2; j++) {
+		for (var j = 0, len2 = path.rooms.length; j < len2; j++) {
 			li.appendChild(ul2);
 			var li2 = document.createElement("li");
 			var span2 = document.createElement("span");
-			span2.innerHTML = buildings[i].rooms[j].name;
-			span2.id = buildings[i].rooms[j].id;
-			li2.id = "li"+buildings[i].rooms[j].id;
+			var path2 = path.rooms[j];
+			span2.innerHTML = path2.name;
+			span2.id = path2.id;
+			li2.id = "li"+path2.id;
 			li2.appendChild(span2);
 			ul2.appendChild(li2);
 
 			if (buildings[i].rooms[j].children) {
 				var ul3 = document.createElement("ul");
-				for (var k = 0, len3 = buildings[i].rooms[j].children.length; k < len3; k++) {
+				for (var k = 0, len3 = path2.children.length; k < len3; k++) {
 					li2.appendChild(ul3);
 					var li3 = document.createElement("li");
 					var span3 = document.createElement("span");
-					span3.innerHTML = buildings[i].rooms[j].children[k].name;
-					span3.id = buildings[i].rooms[j].children[k].id;
-					li3.id = "li"+buildings[i].rooms[j].children[k].id;
+					var path3 = path2.children[k];
+					span3.innerHTML = path3.name;
+					span3.id = path3.id;
+					li3.id = "li"+path3.id;
 					li3.appendChild(span3);
 					ul3.appendChild(li3);
 
-					if (buildings[i].rooms[j].children[k].children) {
+					if (path3.children) {
 						var ul4 = document.createElement("ul");
-						for (var z = 0, len4 = buildings[i].rooms[j].children[k].children.length; z < len4; z++) {
+						for (var z = 0, len4 = path3.children.length; z < len4; z++) {
 							li3.appendChild(ul4);
 							var li4 = document.createElement("li");
 							var span4 = document.createElement("span");
-							span4.innerHTML = buildings[i].rooms[j].children[k].children[z].name;
-							span4.id = buildings[i].rooms[j].children[k].children[z].id;
-							li4.id = "li"+buildings[i].rooms[j].children[k].children[z].id;
+							var path4 = path3.children[z];
+							span4.innerHTML = path4.name;
+							span4.id = path4.id;
+							li4.id = "li"+path4.id;
 							li4.appendChild(span4);
 							ul4.appendChild(li4);
 						}
