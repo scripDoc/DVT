@@ -248,16 +248,18 @@ fBuild.then(function(){
 						var frmNmVl = frmValue.name.value;
 						var frmCntVl = Number(frmValue.count.value);
 
-						let equip = new Scorocode.Object("equipment");
-						equip.set("_id", idEq).set("name", frmNmVl).set("count", frmCntVl);
-						equip.save().then(() => {
-							console.info("done");
-							searchFunc(classIdRm);
-						})
-						.catch((error) => {
-							console.log(error);
-							searchFunc(idEq);
-						});
+						if (frmNmVl&&frmCntVl) {
+							let equip = new Scorocode.Object("equipment");
+							equip.set("_id", idEq).set("name", frmNmVl).set("count", frmCntVl);
+							equip.save().then(() => {
+								console.info("done");
+								searchFunc(classIdRm);
+							})
+							.catch((error) => {
+								console.log(error);
+								searchFunc(idEq);
+							});
+						}
 					}
 					break;
 
@@ -302,18 +304,20 @@ fBuild.then(function(){
 						var frmNmVl = frmValue.name.value;
 						var frmCntVl = Number(frmValue.count.value);
 
-						let comp = new Scorocode.Object("equipment");
-						comp.set("name", frmNmVl);
-						comp.set("room", idEq);
-						comp.set("count", frmCntVl);
-						comp.save().then(() => {
-							console.info("Done");
-							searchFunc(idEq);
-						})
-						.catch((error) => {
-							console.log(error);
-							searchFunc(idEq);
-						});
+						if (frmNmVl&&frmCntVl) {
+							let comp = new Scorocode.Object("equipment");
+							comp.set("name", frmNmVl);
+							comp.set("room", idEq);
+							comp.set("count", frmCntVl);
+							comp.save().then(() => {
+								console.info("Done");
+								searchFunc(idEq);
+							})
+							.catch((error) => {
+								console.log(error);
+								searchFunc(idEq);
+							});
+						}
 					}
 					break;
 			}
