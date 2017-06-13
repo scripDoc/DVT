@@ -83,6 +83,8 @@ fBuild.then(function(){
 		frmValue.reset();
 		var dltBatn = document.getElementById("idBtnActn");
 		dltBatn.innerHTML = "Сохранить";
+		var checkPh = document.querySelector("div.activePh");
+		if (checkPh) checkPh.classList.remove("activePh");
 	}
 
 	var divR = document.getElementById("listOfEquipment");
@@ -259,6 +261,8 @@ fBuild.then(function(){
 								console.log(error);
 								searchFunc(idEq);
 							});
+						} else {
+							document.querySelector("div.groups").classList.add("activePh");
 						}
 					}
 					break;
@@ -317,6 +321,8 @@ fBuild.then(function(){
 								console.log(error);
 								searchFunc(idEq);
 							});
+						} else {
+							document.querySelector("div.groups").classList.add("activePh");
 						}
 					}
 					break;

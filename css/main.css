@@ -246,4 +246,12 @@ li.noEq {
 }
 .ntActGrp .button.buttonBlue:hover { background: #DB0F15; }
 
+::-webkit-input-placeholder {
+	color: transparent;
+	font-family: Comfortaa;
+	font-size: 15px;
+}
 
+div.activePh input::-webkit-input-placeholder {
+	color: #FF0000;
+}
