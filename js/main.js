@@ -250,7 +250,7 @@ fBuild.then(function(){
 						var frmNmVl = frmValue.name.value;
 						var frmCntVl = Number(frmValue.count.value);
 
-						if (frmNmVl&&frmCntVl) {
+						if (frmNmVl&&frmCntVl&&(frmCntVl>0)) {
 							let equip = new Scorocode.Object("equipment");
 							equip.set("_id", idEq).set("name", frmNmVl).set("count", frmCntVl);
 							equip.save().then(() => {
@@ -308,7 +308,7 @@ fBuild.then(function(){
 						var frmNmVl = frmValue.name.value;
 						var frmCntVl = Number(frmValue.count.value);
 
-						if (frmNmVl&&frmCntVl) {
+						if (frmNmVl&&frmCntVl&&(frmCntVl>0)) {
 							let comp = new Scorocode.Object("equipment");
 							comp.set("name", frmNmVl);
 							comp.set("room", idEq);
