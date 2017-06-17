@@ -246,11 +246,11 @@ fBuild.then(function(){
 					frmValue.count.value = Number(spnEqValue[0].innerHTML);
 					formClass.classList.add("active");
 
-					document.getElementById('idBtnActn').onclick = function() {
+					document.getElementById('editFrm').onsubmit = function() {
 						var frmNmVl = frmValue.name.value;
 						var frmCntVl = Number(frmValue.count.value);
 
-						if (frmNmVl&&frmCntVl&&(frmCntVl>0)) {
+						if (frmNmVl&&frmCntVl) {
 							let equip = new Scorocode.Object("equipment");
 							equip.set("_id", idEq).set("name", frmNmVl).set("count", frmCntVl);
 							equip.save().then(() => {
@@ -264,6 +264,7 @@ fBuild.then(function(){
 						} else {
 							document.querySelector("div.groups").classList.add("activePh");
 						}
+						return false;
 					}
 					break;
 
@@ -304,11 +305,11 @@ fBuild.then(function(){
 					formClass.classList.add("addEqBtn");
 					formClass.classList.add("active");
 
-					document.getElementById('idBtnActn').onclick = function() {
+					document.getElementById('editFrm').onsubmit = function() {
 						var frmNmVl = frmValue.name.value;
 						var frmCntVl = Number(frmValue.count.value);
 
-						if (frmNmVl&&frmCntVl&&(frmCntVl>0)) {
+						if (frmNmVl&&frmCntVl) {
 							let comp = new Scorocode.Object("equipment");
 							comp.set("name", frmNmVl);
 							comp.set("room", idEq);
@@ -324,6 +325,7 @@ fBuild.then(function(){
 						} else {
 							document.querySelector("div.groups").classList.add("activePh");
 						}
+						return false;
 					}
 					break;
 			}
